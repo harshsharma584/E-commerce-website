@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Electronics Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: #ffffff;
+            color: #222;
+            line-height: 1.5;
+        }
+
+        .topbar {
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            background: #fff;
+            color: #14213d;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .searchbox {
+            margin: 15px auto;
+            width: 80%;
+            display: block;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .banner {
+            margin: 20px;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #14213d;
+            position: relative;
+            perspective: 800px;
+        }
+
+        .cube {
+            width: 250px;
+            height: 250px;
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+            position: relative;
+            transition: transform 1s ease;
+        }
+        .cube div {
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .face {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            backface-visibility: hidden;
+            border: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .front {
+            transform: rotateY(0deg) translateZ(125px);
+            background-image: url('laptop.jpg');
+        }
+        .right {
+            transform: rotateY(90deg) translateZ(125px);
+            background-image: url('phone.jpg');
+        }
+        .back {
+            transform: rotateY(180deg) translateZ(125px);
+            background-image: url('speaker.jpg');
+        }
+        .left {
+            transform: rotateY(-90deg) translateZ(125px);
+            background-image: url('watch.jpg');
+        }
+
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+        }
+        .catbtn {
+            margin: 5px;
+            padding: 12px 16px;
+            background: #d8f3dc;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .catbtn:hover {
+            background: #b7e4c7;
+            transform: scale(1.05);
+        }
+
+        .featuredtitle {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px;
+            color: #14213d;
+        }
+
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .product {
+            width: 42%;
+            margin: 10px;
+            text-align: center;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: #f9f9f9;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-img {
+            height: 150px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .product p {
+            padding: 10px;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        /* Active (touch/click) effect on products and category buttons ONLY */
+        .product:active,
+        .catbtn:active {
+            transform: scale(1.07);
+            box-shadow: 0 0 20px rgba(0, 123, 255, 0.5);
+        }
+
+        @media (min-width: 768px) {
+            .banner {
+                height: 400px;
+            }
+            .cube,
+            .face {
+                width: 350px;
+                height: 350px;
+            }
+            .front {
+                transform: rotateY(0deg) translateZ(175px);
+            }
+            .right {
+                transform: rotateY(90deg) translateZ(175px);
+            }
+            .back {
+                transform: rotateY(180deg) translateZ(175px);
+            }
+            .left {
+                transform: rotateY(-90deg) translateZ(175px);
+            }
+            .product {
+                width: 22%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">ELECTRONICS</div>
+    <input class="searchbox" type="search" placeholder="Search products..." />
+
+    <div class="banner">
+        <div class="cube" id="cube">
+            <div class="face front"></div>
+            <div class="face right"></div>
+            <div class="face back"></div>
+            <div class="face left"></div>
+        </div>
+    </div>
+
+    <div class="categories">
+        <button class="catbtn">TV & VIDEO</button>
+        <button class="catbtn">COMPUTERS</button>
+        <button class="catbtn">PHONES</button>
+        <button class="catbtn">ACCESSORIES</button>
+        <button class="catbtn">AUDIO</button>
+    </div>
+
+    <div class="featuredtitle">FEATURED</div>
+    <div class="products">
+        <div class="product">
+            <div class="product-img" style="background-image: url('laptop.jpg');"></div>
+            <p>Laptop Pro</p>
+        </div>
+        <div class="product">
+            <div class="product-img" style="background-image: url('phone.jpg');"></div>
+            <p>Smartphone X</p>
+        </div>
+        <div class="product">
+            <div class="product-img" style="background-image: url('watch.jpg');"></div>
+            <p>Smartwatch Neo</p>
+        </div>
+        <div class="product">
+            <div class="product-img" style="background-image: url('speaker.jpg');"></div>
+            <p>Bluetooth Speaker</p>
+        </div>
+    </div>
+
+    <script>
+        const cube = document.getElementById("cube");
+        let lro = 0;
+        setInterval(() => {
+            cube.style.transform = `rotateY(${-lro}deg)`;
+            lro+=90;
+        }, 2500);
+    </script>
+</body>
+</html>
